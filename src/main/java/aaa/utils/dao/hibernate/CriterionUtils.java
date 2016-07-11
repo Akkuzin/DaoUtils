@@ -14,16 +14,14 @@ import static org.hibernate.criterion.Restrictions.disjunction;
 public class CriterionUtils {
 
 	public static Collector<Criterion, Disjunction, Disjunction> toDisjunction() {
-		return Collector.<Criterion, Disjunction> of(	Restrictions::disjunction,
-														Junction::add,
-														(d1, d2) -> (Disjunction) disjunction().add(d1)
-																.add(d2));
+		return Collector.of(Restrictions::disjunction,
+							Junction::add,
+							(d1, d2) -> (Disjunction) disjunction().add(d1).add(d2));
 	}
 
 	public static Collector<Criterion, Conjunction, Conjunction> toConjunction() {
-		return Collector.<Criterion, Conjunction> of(	Restrictions::conjunction,
-														Junction::add,
-														(d1, d2) -> (Conjunction) conjunction().add(d1)
-																.add(d2));
+		return Collector.of(Restrictions::conjunction,
+							Junction::add,
+							(d1, d2) -> (Conjunction) conjunction().add(d1).add(d2));
 	}
 }
